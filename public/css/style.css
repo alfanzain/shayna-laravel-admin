@@ -2206,7 +2206,8 @@ footer.site-footer {
     overflow-x: inherit; }
 
   aside.left-panel.open-menu {
-    overflow-x: scroll; }
+    overflow-x: scroll; 
+    display: block }
 
   aside.left-panel {
     max-width: 83px;
