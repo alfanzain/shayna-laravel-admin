@@ -52,7 +52,7 @@ class ProductGalleryController extends Controller
         );
 
         ProductGallery::create($data);
-        
+
         return redirect()->route('product-galleries.index');
     }
 
@@ -98,6 +98,9 @@ class ProductGalleryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $gallery = ProductGallery::findOrFail($id);
+        $gallery->delete();
+
+        return redirect()->route('product-galleries.index');
     }
 }
