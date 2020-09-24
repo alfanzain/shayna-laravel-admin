@@ -6,7 +6,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="box-title">Daftar Barang</h4>
+                        <h4 class="box-title">Daftar Foto Barang</h4>
                     </div>
                     <div class="card-body--">
                         <div class="table-stats order-table ov-h">
@@ -14,41 +14,30 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
+                                        <th>Item Name</th>
+                                        <th>Image</th>
+                                        <th>Default</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($products as $product)
+                                    @forelse ($galleries as $gallery)
                                     <tr>
                                         <td>
                                             {{ $loop->iteration }}
                                         </td>
                                         <td>
-                                            {{ $product->name }}
-                                            <br />
-                                            <small>ID : {{ $product->id }}</small>
+                                            {{ $gallery->product->name }}
+                                            <small>ID : {{ $gallery->id }}</small>
                                         </td>
                                         <td>
-                                            {{ $product->type }}
+                                            <img src="{{ url($gallery->photo) }}" alt="">
                                         </td>
                                         <td>
-                                            {{ $product->price }}
+                                            {{ $gallery->is_default ? 'Ya' : 'Tidak' }}
                                         </td>
                                         <td>
-                                            {{ $product->quantity }}
-                                        </td>
-                                        <td>
-                                            <a href="#" class="btn btn-info btn-sm">
-                                                <i class="fa fa-picture-o"></i>
-                                            </a>
-                                            <a href="{{ route('products.edit', ['product'=>$product->id]) }}" class="btn btn-primary btn-sm">
-                                                <i class="fa fa-pencil"></i>
-                                            </a>
-                                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-inline">
+                                            <form action="{{ route('product-galleries.destroy', $gallery->id) }}" method="POST" class="d-inline">
                                                 @method('delete')
                                                 @csrf
                                                 <button class="btn btn-danger btn-sm">
@@ -59,7 +48,7 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="6" class="text-center p-5">
+                                        <td colspan="5" class="text-center p-5">
                                             Data Tidak Tersedia
                                         </td>
                                     </tr>

@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
-use App\Models\Product;
-use App\Http\Requests\ProductRequest;
+use App\Models\ProductGallery;
 
-class ProductController extends Controller
+class ProductGalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +15,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $galleries = ProductGallery::with('product')->get();
 
-        return view('pages.products.index')->with([
-            'products' => $products
+        return view('pages.product-galleries.index')->with([
+            'galleries' => $galleries
         ]);
     }
 
@@ -31,7 +29,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('pages.products.create');
+        //
     }
 
     /**
@@ -40,14 +38,9 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->name);
-
-        Product::create($data);
-
-        return redirect()->route('products.index');
+        //
     }
 
     /**
@@ -69,11 +62,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-
-        return view('pages.products.edit')->with([
-            'product' => $product
-        ]);
+        //
     }
 
     /**
@@ -85,13 +74,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->name);
-
-        $product = Product::findOrFail($id);
-        $product->update($data);
-
-        return redirect()->route('products.index');
+        //
     }
 
     /**
@@ -102,9 +85,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
-        $product->delete();
-
-        return redirect()->route('products.index');
+        //
     }
 }
