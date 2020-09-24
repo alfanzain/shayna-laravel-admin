@@ -26,8 +26,8 @@
                                         <td>
                                             {{ $loop->iteration }}
                                         </td>
-                                        <td>
-                                            {{ $gallery->product->name }}
+                                        <td>`
+                                            <br />
                                             <small>ID : {{ $gallery->id }}</small>
                                         </td>
                                         <td>

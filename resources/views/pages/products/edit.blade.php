@@ -4,7 +4,6 @@
     <div class="card">
         <div class="card-header">
             <strong>Ubah Barang</strong>
-            <br />
             <small>{{ $product->name }}</small>
         </div>
         <div class="card-body card-block">
