@@ -10,16 +10,16 @@ class ProductGallery extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'products_id', 'photo', 'is_default'
+        'product_id', 'photo', 'is_default'
     ];
 
     protected $hidden = [
         
     ];
 
-    public function galleries()
+    public function product()
     {
-        return $this->belongsTo(Product::class, 'products_id', 'id');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
     public function getPhotoAttribute($value)
