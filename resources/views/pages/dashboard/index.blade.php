@@ -14,7 +14,7 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text">Rp. <span class="count">123901212</span></div>
+                                <div class="stat-text">Rp. <span class="count">{{ $income }}</span></div>
                                 <div class="stat-heading">Penghasilan</div>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text"><span class="count">3435</span></div>
+                                <div class="stat-text"><span class="count">{{ $sales }}</span></div>
                                 <div class="stat-heading">Penjualan</div>
                             </div>
                         </div>
@@ -54,81 +54,61 @@
                     </div>
                     <div class="card-body--">
                         <div class="table-stats order-table ov-h">
-                            <table class="table ">
+                            <table class="table">
                                 <thead>
                                     <tr>
-                                        <th class="serial">#</th>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Product</th>
-                                        <th>Quantity</th>
+                                        <th>#</th>
+                                        <th>Nama</th>
+                                        <th>Email</th>
+                                        <th>Nomor</th>
+                                        <th>Total</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @forelse ($lastTransactions as $transaction)
                                     <tr>
-                                        <td class="serial">1.</td>
-                                        <td> #5469 </td>
-                                        <td>  <span class="name">Louis Stanley</span> </td>
-                                        <td> <span class="product">Uniqlo</span> </td>
-                                        <td><span class="count">1</span></td>
                                         <td>
-                                            <span class="badge badge-complete">Complete</span>
+                                            {{ $loop->iteration }}
+                                        </td>
+                                        <td>
+                                            <small>TXN ID : {{ $transaction->uuid }}</small>
+                                            <br />
+                                            {{ $transaction->name }}
+                                        </td>
+                                        <td>
+                                            {{ $transaction->email }}
+                                        </td>
+                                        <td>
+                                            {{ $transaction->number }}
+                                        </td>
+                                        <td>
+                                            {{ $transaction->transaction_total }}
+                                        </td>
+                                        <td>
+                                            @if($transaction->transaction_status == '0')
+                                            <span class="badge badge-info">
+                                            @elseif($transaction->transaction_status == '1')
+                                            <span class="badge badge-success">
+                                            @elseif($transaction->transaction_status == '2')
+                                                <span class="badge badge-danger">
+                                            @else
+                                            <span>
+                                            @endif
+                                            {{ $transaction->lastTransactionstatusLabel() }}
+                                            </span>
                                         </td>
                                     </tr>
+                                    @empty
                                     <tr>
-                                        <td class="serial">2.</td>
-                                        <td> #5468 </td>
-                                        <td>  <span class="name">Gregory Dixon</span> </td>
-                                        <td> <span class="product">ZARA</span> </td>
-                                        <td><span class="count">1</span></td>
-                                        <td>
-                                            <span class="badge badge-complete">Complete</span>
+                                        <td colspan="6" class="text-center p-5">
+                                            Data Tidak Tersedia
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="serial">3.</td>
-                                        <td> #5467 </td>
-                                        <td>  <span class="name">Catherine Dixon</span> </td>
-                                        <td> <span class="product">H&M</span> </td>
-                                        <td><span class="count">1</span></td>
-                                        <td>
-                                            <span class="badge badge-complete">Complete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="serial">4.</td>
-                                        <td> #5466 </td>
-                                        <td>  <span class="name">Mary Silva</span> </td>
-                                        <td> <span class="product">Pull&Bear</span> </td>
-                                        <td><span class="count">1</span></td>
-                                        <td>
-                                            <span class="badge badge-pending">Pending</span>
-                                        </td>
-                                    </tr>
-                                    <tr class=" pb-0">
-                                        <td class="serial">5.</td>
-                                        <td> #5465 </td>
-                                        <td>  <span class="name">Johnny Stephens</span> </td>
-                                        <td> <span class="product">Bershka</span> </td>
-                                        <td><span class="count">1</span></td>
-                                        <td>
-                                            <span class="badge badge-complete">Complete</span>
-                                        </td>
-                                    </tr>
-                                    <tr class=" pb-0">
-                                        <td class="serial">5.</td>
-                                        <td> #5466 </td>
-                                        <td>  <span class="name">Kim Ratchet</span> </td>
-                                        <td> <span class="product">Nama</span> </td>
-                                        <td><span class="count">1</span></td>
-                                        <td>
-                                            <span class="badge badge-complete">Complete</span>
-                                        </td>
-                                    </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
-                        </div> <!-- /.table-stats -->
+                        </div>
                     </div>
                 </div> <!-- /.card -->
             </div>  <!-- /.col-lg-8 -->
@@ -161,9 +141,9 @@
 
         // Pie chart flotPie1
         var piedata = [
-            { label: "Pending", data: [[1,32]], color: '#5c6bc0'},
-            { label: "Gagal", data: [[1,33]], color: '#ef5350'},
-            { label: "Sukses", data: [[1,35]], color: '#66bb6a'}
+            { label: "Pending", data: [[1, {{ $statusTransactions['pending'] }}]], color: '#5c6bc0'},
+            { label: "Gagal", data: [[1, {{ $statusTransactions['failed'] }}]], color: '#ef5350'},
+            { label: "Sukses", data: [[1, {{ $statusTransactions['success'] }}]], color: '#66bb6a'}
         ];
 
         $.plot('#flotPie1', piedata, {

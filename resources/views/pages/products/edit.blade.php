@@ -48,15 +48,14 @@
 @push('after-scripts')
     <script src="https://cdn.ckeditor.com/ckeditor5/22.0.0/classic/ckeditor.js"></script>
 
-<!--Local Stuff-->
-<script>
-    ClassicEditor
-        .create( document.querySelector( '.description' ) )
-        .then( editor => {
-                console.log( editor );
-        } )
-        .catch( error => {
-                console.error( error );
-        } );
-</script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '.description' ) )
+            .then( editor => {
+                    console.log( editor );
+            } )
+            .catch( error => {
+                    console.error( error );
+            } );
+    </script>
 @endpush

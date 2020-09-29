@@ -3,7 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductGalleryController;
-
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -30,5 +30,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Product Galleries
     Route::resource('product-galleries', ProductGalleryController::class);
+
+    // Transactions
+    Route::resource('transactions', TransactionController::class);
+    Route::get('transactions/{id}/set-status', [TransactionController::class, 'setStatus'])->name('transactions.status');
 });
 
