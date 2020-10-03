@@ -34,7 +34,7 @@
         right: -10px!important;
     }
     .chart-container {
-        display: table;
+        /* display: table; */
         min-width: 270px ;
         text-align: left;
         padding-top: 10px;

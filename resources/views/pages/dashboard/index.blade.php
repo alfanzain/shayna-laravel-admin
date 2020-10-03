@@ -119,7 +119,13 @@
                         <div class="card br-0">
                             <div class="card-body">
                                 <div class="chart-container ov-h">
-                                    <div id="flotPie1" class="float-chart"></div>
+                                    @if (count($lastTransactions) > 0)
+                                        <div id="flotPie1" class="float-chart"></div>
+                                    @else
+                                        <div class="text-center">
+                                            Belum Ada Transaksi
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div><!-- /.card -->
