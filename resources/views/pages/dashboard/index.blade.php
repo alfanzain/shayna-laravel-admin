@@ -95,7 +95,7 @@
                                             @else
                                             <span>
                                             @endif
-                                            {{ $transaction->lastTransactionstatusLabel() }}
+                                            {{ $transaction->transactionStatusLabel() }}
                                             </span>
                                         </td>
                                     </tr>

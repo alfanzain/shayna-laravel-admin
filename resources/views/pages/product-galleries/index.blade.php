@@ -26,9 +26,12 @@
                                         <td>
                                             {{ $loop->iteration }}
                                         </td>
-                                        <td>`
+                                        <td>
+                                            <a href="{{ route('products.gallery', $gallery->product->id) }}" class="btn-link">
+                                                {{ $gallery->product->name }}
+                                            </a>
                                             <br />
-                                            <small>ID : {{ $gallery->id }}</small>
+                                            <small>Product ID : {{ $gallery->product->id }}</small>
                                         </td>
                                         <td>
                                             <img src="{{ url($gallery->photo) }}" alt="">

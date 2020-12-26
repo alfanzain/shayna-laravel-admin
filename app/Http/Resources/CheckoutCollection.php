@@ -38,7 +38,7 @@ class CheckoutCollection extends ResourceCollection
                             : 'failed',
                 'message' => !is_null($this->collection) 
                             ? 'Data daftar checkout berhasil diambil'
-                            : 'Data daftar checkout gagal diambil',
+                            : 'Data daftar checkout tidak ditemukan',
             ],
         ];
     }

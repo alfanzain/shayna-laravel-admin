@@ -38,7 +38,7 @@ class ProductCollection extends ResourceCollection
                             : 'failed',
                 'message' => !is_null($this->collection) 
                             ? 'Data daftar produk berhasil diambil'
-                            : 'Data daftar produk gagal diambil',
+                            : 'Data daftar produk tidak ditemukan',
             ],
         ];
     }

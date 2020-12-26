@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CheckoutResource extends JsonResource
+class TransactionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -34,8 +34,8 @@ class CheckoutResource extends JsonResource
                             ? 'success'
                             : 'failed',
                 'message' => !is_null($this->resource) 
-                            ? 'Data checkout berhasil dibuat'
-                            : 'Data checkout tidak ditemukan',
+                            ? 'Data transaksi berhasil diambil'
+                            : 'Data transaksi tidak ditemukan',
             ],
         ];
     }

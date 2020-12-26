@@ -28,7 +28,8 @@ class ProductResource extends JsonResource
                 'description' => $this->description,
                 'price' => $this->price,
                 'quantity' => $this->quantity,
-                
+                'galleries' => GalleryResource::collection($this->whenLoaded('galleries')),
+
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at,
             ];
@@ -52,7 +53,7 @@ class ProductResource extends JsonResource
                             : 'failed',
                 'message' => !is_null($this->resource) 
                             ? 'Data produk berhasil diambil'
-                            : 'Data produk gagal diambil',
+                            : 'Data produk tidak ditemukan',
             ],
         ];
     }

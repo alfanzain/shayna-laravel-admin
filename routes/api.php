@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\TransactionController;
 use App\Http\Controllers\API\CheckoutController;
 use App\Http\Controllers\API\ProductController;
 use Illuminate\Http\Request;
@@ -16,13 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
+Route::get('products', [ProductController::class, 'index']);
 
-Route::apiResource('products', ProductController::class)->only([
-    'index', 'show'
-]);
+Route::get('products/{query}', [ProductController::class, 'show']);
 
 Route::post('checkout', [CheckoutController::class, 'checkout']);
+
+Route::get('transactions/{id}', [TransactionController::class, 'get']);
